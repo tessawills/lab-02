@@ -8,20 +8,21 @@ use python "input->" function, enter a line of a few letters, such as "abcd"
 import socket
 
 def main():
-
+    #designating IP address and port number
     hostname = "172.20.10.3"
     portnum = 10000
-    # TODO: Create a socket and connect it to the server at the designated IP and port
+    # Creates a socket and connects it to the server at the designated IP and port
     tcp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     tcp_sock.connect((hostname, portnum))
     
-    # TODO: Get user input and send it to the server using your TCP socket
+    # Gets user input and sends it to the server using our TCP socket
     usrinput = input("Enter an input: ")
+    #use .encode() to convert to the string to bytes in order to be read by server
     tcp_sock.sendall(usrinput.encode())
     
-    # TODO: Receive a response from the server and close the TCP connection
+    # Receives a response from the server and closes the TCP connection
     msg = tcp_sock.recv(256)
-    #decoded message to get rid of "b" at beginning of message
+    #decoded message from bytes to string to get rid of "b" at beginning of message
     print(msg.decode())
     tcp_sock.close()
     pass
